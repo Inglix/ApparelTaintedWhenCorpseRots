@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	
+	<Operation Class="PatchOperationSequence">
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>/Defs/ThoughtDef[defName = "DeadMansApparel"]/stages/li[1]/description</xpath>
+				<value>
+					<description>I am wearing a piece of apparel taken from a rotting corpse. It creeps me out and feels dirty.</description>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>/Defs/ThoughtDef[defName = "DeadMansApparel"]/stages/li[2]/description</xpath>
+				<value>
+					<description>I am wearing two pieces of apparel taken from a rotting corpse. It creeps me out and feels dirty.</description>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>/Defs/ThoughtDef[defName = "DeadMansApparel"]/stages/li[3]/description</xpath>
+				<value>
+					<description>I am wearing three pieces of apparel taken from a rotting corpse. It creeps me out and feels dirty.</description>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>/Defs/ThoughtDef[defName = "DeadMansApparel"]/stages/li[4]/description</xpath>
+				<value>
+					<description>I am wearing four or more pieces of apparel taken from a rotting corpse. It creeps me out and feels dirty.</description>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>/Defs/ThoughtDef[defName = "DeadMansApparel"]/stages/li[1]/baseMoodEffect</xpath>
+				<value>
+					<baseMoodEffect>-10</baseMoodEffect>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>/Defs/ThoughtDef[defName = "DeadMansApparel"]/stages/li[2]/baseMoodEffect</xpath>
+				<value>
+					<baseMoodEffect>-16</baseMoodEffect>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>/Defs/ThoughtDef[defName = "DeadMansApparel"]/stages/li[3]/baseMoodEffect</xpath>
+				<value>
+					<baseMoodEffect>-22</baseMoodEffect>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>/Defs/ThoughtDef[defName = "DeadMansApparel"]/stages/li[4]/baseMoodEffect</xpath>
+				<value>
+					<baseMoodEffect>-28</baseMoodEffect>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	
+</Patch>
