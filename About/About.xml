@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ModMetadata>
+<ModMetaData>
 	<name>Apparel Tainted Only When Corpse Rots</name>
 	<author>Inglix</author>
 	<supportedVersions>
@@ -23,4 +23,4 @@
 		<li>Ludeon.Rimworld.Ideology</li>
 	</loadAfter>
 	<description>Makes apparel tainted only when worn by a rotting corpse.</description>
-</ModMetadata>
+</ModMetaData>
