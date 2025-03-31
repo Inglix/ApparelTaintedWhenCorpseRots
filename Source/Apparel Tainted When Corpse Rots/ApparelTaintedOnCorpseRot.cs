@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 using HarmonyLib;
 using System.Reflection;
@@ -27,16 +22,12 @@ namespace ApparelTaintedOnCorpseRot
     {
         static bool Prefix(Pawn_ApparelTracker __instance, DamageInfo? dinfo)
         {
-            if (dinfo != null && dinfo.Value.Def.ExternalViolenceFor(__instance.pawn))
+            if (dinfo == null || !dinfo.Value.Def.ExternalViolenceFor(__instance.pawn)) return false;
+            for (var i = 0; i < __instance.GetDirectlyHeldThings().Count; i++)
             {
-                for (int i = 0; i < __instance.GetDirectlyHeldThings().Count; i++)
-                {
-                    if (__instance.GetDirectlyHeldThings()[i].def.useHitPoints)
-                    {
-                        int num = Mathf.RoundToInt((float)__instance.GetDirectlyHeldThings()[i].HitPoints * Rand.Range(0.15f, 0.4f));
-                        __instance.GetDirectlyHeldThings()[i].TakeDamage(new DamageInfo(dinfo.Value.Def, (float)num, 0f, -1f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown, null, true, true));
-                    }
-                }
+                if (!__instance.GetDirectlyHeldThings()[i].def.useHitPoints) continue;
+                var num = Mathf.RoundToInt(__instance.GetDirectlyHeldThings()[i].HitPoints * Rand.Range(0.15f, 0.4f));
+                __instance.GetDirectlyHeldThings()[i].TakeDamage(new DamageInfo(dinfo.Value.Def, num));
             }
             return false;
         }
@@ -48,16 +39,15 @@ namespace ApparelTaintedOnCorpseRot
     {
         static void Postfix(Corpse __instance)
         {
-            Pawn corpseOwner = __instance.InnerPawn;
-            if (corpseOwner.apparel != null) 
+            var rot = __instance.TryGetComp<CompRottable>();
+            if (rot == null || rot.Stage == RotStage.Fresh) return;
+            var corpseOwner = __instance.InnerPawn;
+            if (corpseOwner?.apparel == null) return;
+            var corpseApparel = (ThingOwner<Apparel>)corpseOwner.apparel.GetDirectlyHeldThings();
+            foreach (var t in corpseApparel)
             {
-                ThingOwner<Apparel> corpseApparel = (ThingOwner<Apparel>)corpseOwner.apparel.GetDirectlyHeldThings();
-                for (int i = 0; i < corpseApparel.Count; i++)
-                {
-                    corpseApparel[i].Notify_PawnKilled();
-                }
+                t.Notify_PawnKilled();
             }
-
         }
     }
 }
